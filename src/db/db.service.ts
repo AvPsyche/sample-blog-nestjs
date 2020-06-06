@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Blog } from './blog.entitiy';
 import { Comment } from './comment.entity';
 
 @Injectable()
 export class DbService {
   blogs: Blog[];
+  comments: Comment[];
 
   constructor() {
     this.blogs = [];
@@ -12,6 +13,10 @@ export class DbService {
     this.blogs.push(new Blog('Title 2', 'Body 2'));
 
     this.blogs[0].comments = [ new Comment('comment 1'), new Comment('comment 2') ];
+
+    this.comments = [];
+    this.comments = this.blogs[0].comments;
+    this.comments[0].blogPost = this.blogs[0];
   }
 
   async getAllBlogs() {
@@ -28,13 +33,15 @@ export class DbService {
   }
 
   async getBlogById(id: number) {
-    // console.log(id, this.blogs);
-    // console.log(this.blogs.find(b => b.id === id));
     return this.blogs.find(b => b.id === id);
   }
 
   async getCommentById(id: number) {
-    return ( await this.getAllComments() ).find(c => c.id === id);
+    const allComments = await this.getAllComments();
+    const foundComment = allComments.find(c => {
+      return c && (parseInt(c.id) === id);
+    });
+    return foundComment
   }
 
   async addNewBlog(blog: Blog) {

@@ -29,13 +29,9 @@ export class BlogsService {
   }
 
   async updateBlog(id: number, updateBlogDto: UpdateBlogDto) {
-    console.log(id, updateBlogDto);
     
     const updateBlog = await this.findNewBlog(id);
-    console.log(updateBlog);
-
     Object.assign(updateBlog, updateBlogDto);
-    console.log('UPDATED BLOG', updateBlog);
 
     return this.dbService.updateBlog(updateBlog);
   }

@@ -1,4 +1,5 @@
 import { Blog } from "./blog.entitiy";
+let counter = 0;
 
 export class Comment {
   id: number;
@@ -7,6 +8,6 @@ export class Comment {
 
   constructor(text: string) {
     this.text = text;
-    this.id = Date.now();
+    this.id = ++counter
   }
 }

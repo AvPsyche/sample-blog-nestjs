@@ -1,9 +1,11 @@
 @url = http://localhost:3000/api/v1
+
 GET {{url}}/blogs
 
 ###
 
-GET {{url}}/blogs/1590690680898
+
+GET {{url}}/blogs/1
 
 ###
 
@@ -27,3 +29,24 @@ Content-Type: application/json
 ###
 
 DELETE {{url}}/blogs/1590691185712
+
+###
+GET {{url}}/comments
+
+###
+
+GET {{url}}/comments/1
+
+###
+
+POST {{url}}/comments
+Content-Type: application/json
+
+{
+  "text": "Just one another comment"
+}
+
+###
+
+DELETE {{url}}/comments/
+
