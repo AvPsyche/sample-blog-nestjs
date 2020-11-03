@@ -1,13 +1,14 @@
+import { PrimaryGeneratedColumn, Column, Entity, ManyToOne } from 'typeorm'
 import { Blog } from "./blog.entitiy";
-let counter = 0;
 
+@Entity()
 export class Comment {
+  @PrimaryGeneratedColumn()
   id: number;
-  text: string;
-  blogPost: Blog;
 
-  constructor(text: string) {
-    this.text = text;
-    this.id = ++counter
-  }
+  @Column()
+  text: string;
+
+  @ManyToOne(() => Blog, blog => blog.comments)
+  blogPost: Blog;
 }

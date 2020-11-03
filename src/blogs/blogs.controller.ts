@@ -7,7 +7,7 @@ import { UpdateBlogDto } from './updateBlog.dto';
 @Controller('api/v1/blogs')
 export class BlogsController {
   constructor(private blogService: BlogsService) {}
-  
+
   @Get()
   async getAllBlogs() {
     return this.blogService.findAllBlogs();

@@ -1,15 +1,17 @@
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany, JoinTable } from 'typeorm'
 import { Comment } from "./comment.entity";
-let counter = 0;
 
+@Entity()
 export class Blog {
-  title: string;
-  body: string;
+  @PrimaryGeneratedColumn()
   id: number;
-  comments: Comment[];
 
-  constructor(title: string, body: string) {
-    this.title = title;
-    this.body = body;
-    this.id = ++counter
-  }
+  @Column()
+  title: string;
+
+  @Column()
+  body: string;
+
+  @OneToMany(() => Comment, comment => comment.blogPost)
+  comments: Comment[];
 }

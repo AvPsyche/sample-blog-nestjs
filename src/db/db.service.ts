@@ -1,8 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import PrismaClient from '@prisma/client'
 import { Blog } from './blog.entitiy';
 import { Comment } from './comment.entity';
 
 @Injectable()
+const prisma = new PrismaClient();
 export class DbService {
   blogs: Blog[];
   comments: Comment[];
@@ -20,7 +22,7 @@ export class DbService {
   }
 
   async getAllBlogs() {
-    return this.blogs;
+    return prisma.blogs.findMany();
   }
 
 
